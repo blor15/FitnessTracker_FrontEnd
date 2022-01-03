@@ -1,6 +1,6 @@
 import { BASE_URL } from "./constant";
 
-export async function activities() {
+export async function getAllActivities() {
     try {
         const response = await fetch(`${BASE_URL}/activities`)
         const result = await response.json();
@@ -10,23 +10,23 @@ export async function activities() {
     } throw err;
 };
 
-export async function createActivities ({id, name, description}, token) {
-    return await fetch(`${BASE_URL}/activities`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify({
-            id,
-            name,
-            description
-        }) 
-           .then(response => response.json())
-           .then(result => {
-               console.log(result);
-           }) 
-    }      
-)}
+export async function createActivities (name, description, token) {
+    try {
+        const response = await fetch(`${BASE_URL}/activities`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                name: name,
+                description: description
+            })
+        })
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(err)
+    } throw error;
+};
 
-export async function updateActivities ()

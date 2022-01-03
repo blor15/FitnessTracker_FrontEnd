@@ -1,21 +1,22 @@
 import { BASE_URL } from "./constant";
 
-export async function fetchRoutines() {
-    return await fetch(`${BASE_URL}/routines`, {
-        method: 'GET',
+export async function fetchAllRoutines() {
+    try {
+        const response = await fetch(`${BASE_URL}/routines`, {
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
-        .catch(console.error);
+        const result = await response.json();
+        return result
+    } catch (error) {
+        console.error(error)
+    }
 };
 
 export async function createRoutines (name, goal, isPublic, token) {
-    return await fetch(`${BASE_URL}/routines`, {
+   try{ 
+       const response = await fetch(`${BASE_URL}/routines`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -26,15 +27,17 @@ export async function createRoutines (name, goal, isPublic, token) {
             goal: goal,
             isPublic: isPublic
         })
-    }).then(response => response.json())
-      .then(result => {
-          console.log(result);
-      })
-      .catch(console.error);
+    })
+    const result = await response.json();
+    return result
+    } catch (error) {
+        console.error(error);
+    }
 };    
 
-export async function editRoutines(routineId, name, goal, isPublic, token) {
-    return await fetch(`${BASE_URL}/routines/${routineId}`, {
+export async function editRoutines( name, goal, isPublic, token) {
+    try {
+        const response = await fetch(`${BASE_URL}/routines/${routineId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -45,23 +48,27 @@ export async function editRoutines(routineId, name, goal, isPublic, token) {
             goal: goal,
             isPublic: isPublic
         })
-    }).then(response => response.json())
-      .then(result => {
-          console.log(result);
-      })
-      .catch(console.error);
+    })
+    const result = await response.json();
+    return result
+    } catch (error) {
+        console.error(error);
+    }
 };
 
-export async function delteRoutine(routineId, token) {
-    return await fetch(`${BASE_URL}/routines/${routineId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer' + token
-        },
-    }).then(response => response.json())
-      .then(result => {
-        console.log(result);
-    })
-      .catch(console.error);
+export async function deleteRoutine(token) {
+    try {
+        const response = await fetch(`${BASE_URL}/routines/${routineId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer' + token
+            },
+        })
+        const result = await response.json();
+        return result
+    }   catch (error) {
+        console.error(error);
+    }
+
 };
