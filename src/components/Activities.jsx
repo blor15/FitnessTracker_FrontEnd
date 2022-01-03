@@ -1,10 +1,11 @@
 import React from 'react';
 import { getAllActivities } from '../api'
+import { CreateActivity } from './CreateActivity';
 
 export const Activities = ({ token, activities, setActivities }) => {
     return (
         <main style={{margin: 4 +'em'}} className="border mb-4 rounded overflow-hidden">
-        { token ? <CreateActivities setActivities={setActivities} token={token} activities={activities}/> : null }
+        { token ? <CreateActivity setActivities={setActivities} token={token} activities={activities}/> : null }
 
         <h1>Activities</h1> 
         {activities &&

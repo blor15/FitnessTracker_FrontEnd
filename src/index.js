@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route } from 'react-router-dom';
-import { Activities } from './components/Activities';
+import { BASE_URL } from './api/constant';
 
+import { Activities } from './components/Activities';
 import { Homepage } from './components/Homepage';
 import { Logout } from './components/Logout';
 import { Routines } from './components/Routines';
-import { Header } from './components/Header';
+import { Navbar } from './components/Navbar';
 import { Login } from './components/Login';
-import { BASE_URL } from './api/constant';
 import { MyRoutines } from './components/MyRoutines';
 
 const Home = () => {
@@ -48,7 +48,7 @@ getActivities();
 
   return (
       <BrowserRouter>
-          <Header />
+          <Navbar />
           <Route path='/login' exact render={(routeProps) => <Login {...routeProps} setToken={setToken} token={token}/> } />
           <Route path='/register' exact render={(routeProps) => <Login {...routeProps} setToken={setToken} /> } />
           <Route path='/activities' exact render={() => <Activities token={token} activities={activities} setActivities={setActivities}/> } />

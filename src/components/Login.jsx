@@ -5,11 +5,10 @@ import { login, register } from '../api/users';
 
 export const Login = ({ match, history, setToken, token }) => {
 
-
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
+
 
   return (
       <form
@@ -18,7 +17,7 @@ export const Login = ({ match, history, setToken, token }) => {
               if (match.url === '/register') {
                   try {
                       const res = await register(username, password, setToken, setConfirmedPassword);
-                      if (res.token) history.push('/activities')
+                      if (res.token) history.push('/')
                   } catch (error) {
                       console.log(error)
                   }
@@ -26,7 +25,7 @@ export const Login = ({ match, history, setToken, token }) => {
               if (match.path === '/login') {
                   try {
                       const res = await login(username, password, setToken)
-                      if (res.token) history.push('/activities')
+                      if (res.token) history.push('/')
                   } catch (error) {
                       console.log(error)
                   }

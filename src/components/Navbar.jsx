@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const Header = ({ token }) => {
+export const Navbar = ({ token }) => {
     return (
         <header className='navbar navbar-expand-sm navbar-light bg-light fixed-top'>
             <div className='collapse navbar-collapse' id='navbarNav'>

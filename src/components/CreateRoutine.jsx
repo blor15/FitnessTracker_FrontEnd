@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getUserRoutines } from '../api/users';
+import { BASE_URL } from '../api/constant';
+import { createRoutines } from '../api/routines';
 
-const NewRoutine = ({setMyRoutines, token, myRoutines}) => {
+export const CreateRoutine = ({setMyRoutines, token, myRoutines}) => {
     const [routineName, setRoutineName] = useState('')
     const [routineGoal, setRoutineGoal] = useState('')
     const [isPublic, setIsPublic] = useState(false)
     const username = localStorage.getItem('username')
 
     useEffect(async () => {
-        const fetchedRoutines = await getUserRoutines
+        const fetchedRoutines = await createRoutines(username, setMyRoutines, token)
         await setMyRoutines(fetchedRoutines)
     }, [])
 
@@ -22,8 +23,7 @@ const NewRoutine = ({setMyRoutines, token, myRoutines}) => {
                     console.log("Form submitted")
 
                     try {
-                        const response = await fetch(
-                            API_URL + '/api/routines',
+                        const response = await fetch(`${BASE_URL}/routines`,   
                         {
                             method: "POST",
                             headers: {
@@ -38,7 +38,7 @@ const NewRoutine = ({setMyRoutines, token, myRoutines}) => {
                         })
                         
                         const result = await response.json();
-                        const newRoutineResult = await handleFetchingUserRoutines(username, setMyRoutines, token)
+                        const newRoutineResult = await createRoutines(username, setMyRoutines, token)
                         
                         console.log("API call result is", newRoutineResult)
                     } catch (error) {

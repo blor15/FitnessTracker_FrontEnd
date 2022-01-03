@@ -2,8 +2,9 @@ import { BASE_URL } from './constant';
 
 //user endpoints
 
-export async function register(username, password) {
-    try{
+export async function register(username, password, setToken, setUsername, setPassword) {
+    try {
+       if(password.length > 8) {
         const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
         headers: {
@@ -15,7 +16,20 @@ export async function register(username, password) {
         })
     })
         const result = await response.json();
-        return result
+        if (result.token) {
+            const token = result.token;
+            const username = result.user.username
+            setToken(token);
+            localStorage.setItem('token', token);
+            setUsername(username)
+            localStorage.setItem('username', username)
+            return result
+        } else {
+            alert(result.error)
+            setUsername('');
+            setPassword('');
+        }
+       }
     }   catch (error) {
         console.error(error)
     }
@@ -35,7 +49,19 @@ export async function login(username, password){
             })
         })
         const result = await response.json();
-        return result;
+        if (result.token) {
+            const token = result.token;
+            const username = result.user.username
+            setToken(token);
+            localStorage.setItem('token', token);
+            setUsername(username)
+            localStorage.setItem('username', username)
+            return result
+        } else {
+            alert(result.error)
+            setUsername('');
+            setPassword('');
+        }
     } catch (error) {
         console.error(error);
     }

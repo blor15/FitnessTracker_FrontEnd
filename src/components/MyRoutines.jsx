@@ -30,7 +30,7 @@ export const MyRoutines = ({token, user}) => {
     return  (
             <div>
 
-            <h2> Routines for {user} </h2>
+            <h2> My routines: </h2>
 
             {myRoutines.map((routine, index) => {
                 return (
